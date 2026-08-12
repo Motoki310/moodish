@@ -25,35 +25,46 @@
     サーバー保存ではないため、他の端末・他のブラウザのデータは表示されません。</p>
   </section>
 
-  <div class="admin-toolbar">
-    <span id="entry-count" class="entry-count">0件の送信データ</span>
-    <div class="admin-actions">
-      <button id="export-btn" class="btn-secondary" type="button">JSONで書き出し</button>
-      <button id="clear-btn" class="btn-danger" type="button">全データを削除</button>
-    </div>
-  </div>
+  <section id="admin-login" class="admin-login">
+    <form id="admin-login-form" class="admin-login-form">
+      <label for="admin-password">管理者パスワード</label>
+      <input type="password" id="admin-password" name="admin-password" autocomplete="current-password" required>
+      <button type="submit" class="btn-primary">ログイン</button>
+      <p id="admin-login-error" class="admin-login-error hidden">パスワードが違います。</p>
+    </form>
+  </section>
 
-  <div class="table-wrap">
-    <table class="admin-table">
-      <thead>
-        <tr>
-          <th>送信日時</th>
-          <th>目的・関係性</th>
-          <th>場所</th>
-          <th>予算/1人</th>
-          <th>シーン</th>
-          <th>希望日時</th>
-          <th>ジャンル</th>
-          <th>席</th>
-          <th>雰囲気</th>
-          <th>NG(苦手料理・アレルギー・喫煙)</th>
-        </tr>
-      </thead>
-      <tbody id="admin-table-body">
-        <!-- JSで挿入 -->
-      </tbody>
-    </table>
-    <p id="empty-state" class="empty-state hidden">まだ送信データがありません。提案フォームから送信すると、ここに表示されます。</p>
+  <div id="admin-content" class="hidden">
+    <div class="admin-toolbar">
+      <span id="entry-count" class="entry-count">0件の送信データ</span>
+      <div class="admin-actions">
+        <button id="export-btn" class="btn-secondary" type="button">JSONで書き出し</button>
+        <button id="clear-btn" class="btn-danger" type="button">全データを削除</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>送信日時</th>
+            <th>目的・関係性</th>
+            <th>場所</th>
+            <th>予算/1人</th>
+            <th>シーン</th>
+            <th>希望日時</th>
+            <th>ジャンル</th>
+            <th>席</th>
+            <th>雰囲気</th>
+            <th>NG(苦手料理・アレルギー・喫煙)</th>
+          </tr>
+        </thead>
+        <tbody id="admin-table-body">
+          <!-- JSで挿入 -->
+        </tbody>
+      </table>
+      <p id="empty-state" class="empty-state hidden">まだ送信データがありません。提案フォームから送信すると、ここに表示されます。</p>
+    </div>
   </div>
 
 </main>

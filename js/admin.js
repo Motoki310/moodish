@@ -3,13 +3,37 @@
 // ==========================================================
 
 const STORAGE_KEY = "dateSpotProposalSubmissions";
+const ADMIN_PASSWORD = "eY3$Tf@FJLjkj^UwOQVr";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const loginSection = document.getElementById("admin-login");
+  const loginForm = document.getElementById("admin-login-form");
+  const passwordInput = document.getElementById("admin-password");
+  const loginError = document.getElementById("admin-login-error");
+  const content = document.getElementById("admin-content");
+
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (passwordInput.value === ADMIN_PASSWORD) {
+      loginSection.classList.add("hidden");
+      content.classList.remove("hidden");
+      initAdminContent();
+    } else {
+      loginError.classList.remove("hidden");
+      passwordInput.value = "";
+      passwordInput.focus();
+    }
+  });
+
+  passwordInput.focus();
+});
+
+function initAdminContent() {
   renderTable();
 
   document.getElementById("export-btn").addEventListener("click", exportJson);
   document.getElementById("clear-btn").addEventListener("click", clearAll);
-});
+}
 
 function getSubmissions() {
   return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
