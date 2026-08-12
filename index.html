@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お店を提案してもらう | デートレストラン提案サイト(プロトタイプ)</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">🌸 デートスポット提案 <span class="beta">β</span></a>
+    <nav class="header-nav">
+      <a href="admin.html" class="admin-link">管理者用</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+
+  <section class="intro">
+    <h1>今日のデート、どんなお店にする?</h1>
+    <p>いくつか質問に答えるだけで、シーンに合ったお店を3つ提案します。<br>
+    (このページはプロトタイプです。提案結果は仮のダミーデータです)</p>
+  </section>
+
+  <form id="proposal-form" class="proposal-form" novalidate>
+
+    <fieldset class="form-block">
+      <legend>必須項目</legend>
+
+      <div class="field">
+        <label for="purpose">目的・関係性<span class="required">必須</span></label>
+        <select id="purpose" name="purpose" required>
+          <option value="" disabled selected>選択してください</option>
+          <option value="初デート">初デート</option>
+          <option value="付き合う前">付き合う前</option>
+          <option value="恋人との普通のデート">恋人との普通のデート</option>
+          <option value="誕生日">誕生日</option>
+          <option value="記念日">記念日</option>
+          <option value="ちょっと特別">ちょっと特別</option>
+          <option value="友達以上恋人未満">友達以上恋人未満</option>
+          <option value="その他">その他</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>場所<span class="required">必須</span></label>
+        <div class="radio-row" role="radiogroup" aria-label="場所の指定方法">
+          <label class="radio-pill">
+            <input type="radio" name="locationMode" value="area" checked>
+            エリア指定
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="locationMode" value="midpoint">
+            2人の最寄駅から中間地点を提案
+          </label>
+        </div>
+
+        <div id="location-area" class="sub-field">
+          <input type="text" id="area" name="area" placeholder="例:恵比寿、渋谷駅周辺 など">
+        </div>
+
+        <div id="location-midpoint" class="sub-field hidden">
+          <div class="two-col">
+            <input type="text" id="station1" name="station1" placeholder="自分の最寄駅">
+            <input type="text" id="station2" name="station2" placeholder="相手の最寄駅">
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="budget">予算 / 1人<span class="required">必須</span></label>
+        <select id="budget" name="budget" required>
+          <option value="" disabled selected>選択してください</option>
+          <option value="〜3,000円">〜3,000円</option>
+          <option value="3,000〜5,000円">3,000〜5,000円</option>
+          <option value="5,000〜8,000円">5,000〜8,000円</option>
+          <option value="8,000〜12,000円">8,000〜12,000円</option>
+          <option value="12,000円〜">12,000円〜</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>ランチ・ディナー・カフェ<span class="required">必須</span></label>
+        <div class="radio-row" role="radiogroup" aria-label="利用シーン">
+          <label class="radio-pill">
+            <input type="radio" name="scene" value="ランチ" required>
+            ランチ
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="scene" value="ディナー">
+            ディナー
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="scene" value="カフェ">
+            カフェ
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="datetime">日時<span class="required">必須</span></label>
+        <input type="datetime-local" id="datetime" name="datetime" required>
+      </div>
+
+      <div class="field">
+        <label for="genre">店のジャンル<span class="required">必須</span></label>
+        <select id="genre" name="genre" required>
+          <option value="" disabled selected>選択してください</option>
+          <option value="イタリアン">イタリアン</option>
+          <option value="焼肉">焼肉</option>
+          <option value="和食">和食</option>
+          <option value="フレンチ">フレンチ</option>
+          <option value="中華">中華</option>
+          <option value="カフェ">カフェ</option>
+          <option value="その他">その他</option>
+          <option value="特に決めてない">特に決めてない</option>
+        </select>
+      </div>
+
+    </fieldset>
+
+    <fieldset class="form-block optional">
+      <legend>任意項目</legend>
+
+      <div class="field">
+        <label for="seat">席</label>
+        <select id="seat" name="seat">
+          <option value="おまかせ" selected>おまかせ</option>
+          <option value="カウンター">カウンター</option>
+          <option value="テーブル">テーブル</option>
+          <option value="半個室">半個室</option>
+          <option value="個室">個室</option>
+        </select>
+      </div>
+
+      <div class="field mood-field">
+        <label>雰囲気</label>
+
+        <div class="slider-row">
+          <span class="slider-label-left">カジュアル</span>
+          <input type="range" name="moodCasualSpecial" min="0" max="4" value="2">
+          <span class="slider-label-right">特別感</span>
+        </div>
+
+        <div class="slider-row">
+          <span class="slider-label-left">明るい</span>
+          <input type="range" name="moodBrightDark" min="0" max="4" value="2">
+          <span class="slider-label-right">暗め</span>
+        </div>
+
+        <div class="slider-row">
+          <span class="slider-label-left">にぎやか</span>
+          <input type="range" name="moodLivelyQuiet" min="0" max="4" value="2">
+          <span class="slider-label-right">静か</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="ngFood">苦手な料理</label>
+        <input type="text" id="ngFood" name="ngFood" placeholder="例:パクチー、生もの など">
+      </div>
+
+      <div class="field">
+        <label for="allergy">アレルギー</label>
+        <input type="text" id="allergy" name="allergy" placeholder="例:卵、甲殻類 など">
+      </div>
+
+      <div class="field">
+        <label for="smoking">喫煙可否</label>
+        <select id="smoking" name="smoking">
+          <option value="こだわらない" selected>こだわらない</option>
+          <option value="禁煙希望">禁煙希望</option>
+          <option value="喫煙可でもOK">喫煙可でもOK</option>
+        </select>
+      </div>
+
+    </fieldset>
+
+    <div class="submit-row">
+      <button type="submit" class="btn-primary">お店を提案してもらう</button>
+    </div>
+
+  </form>
+
+  <section id="result" class="result hidden">
+    <h2>あなたにおすすめのお店 3選</h2>
+    <p class="result-note">※ プロトタイプのため、実際の絞り込みは行わずダミーデータから3件を表示しています。</p>
+    <div id="result-cards" class="result-cards"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>デートレストラン提案サイト(プロトタイプ) / 入力データは <a href="admin.html">管理者用ページ</a> で確認できます。</p>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
