@@ -27,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // 予算スライダー(下限・上限)の連動
+  setupBudgetSliders(form);
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -43,6 +46,43 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// 予算スライダー(下限・上限)のセットアップ:
+// - ドラッグ中に上のラベルへ金額をリアルタイム表示
+// - 下限が上限を追い越さないように、追い越したら相手側を押し出す
+function setupBudgetSliders(form) {
+  const minInput = form.querySelector("#budgetMin");
+  const maxInput = form.querySelector("#budgetMax");
+  const minLabel = document.getElementById("budgetMinLabel");
+  const maxLabel = document.getElementById("budgetMaxLabel");
+
+  function update() {
+    let min = Number(minInput.value);
+    let max = Number(maxInput.value);
+
+    if (min > max) {
+      // 直前に動かした方を優先して、もう一方を追従させる
+      if (document.activeElement === minInput) {
+        max = min;
+        maxInput.value = max;
+      } else {
+        min = max;
+        minInput.value = min;
+      }
+    }
+
+    minLabel.textContent = formatYen(min);
+    maxLabel.textContent = formatYen(max);
+  }
+
+  minInput.addEventListener("input", update);
+  maxInput.addEventListener("input", update);
+  update();
+}
+
+function formatYen(n) {
+  return `${Number(n).toLocaleString()}円`;
+}
+
 function collectFormData(form) {
   const fd = new FormData(form);
   const locationMode = fd.get("locationMode");
@@ -51,6 +91,9 @@ function collectFormData(form) {
     locationMode === "area"
       ? (fd.get("area") || "").trim() || "(未入力)"
       : `${(fd.get("station1") || "").trim() || "未入力"} と ${(fd.get("station2") || "").trim() || "未入力"} の中間`;
+
+  const budgetMin = Number(fd.get("budgetMin"));
+  const budgetMax = Number(fd.get("budgetMax"));
 
   return {
     id: `sub_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
@@ -62,7 +105,9 @@ function collectFormData(form) {
     area: fd.get("area") || "",
     station1: fd.get("station1") || "",
     station2: fd.get("station2") || "",
-    budget: fd.get("budget") || "",
+    budgetMin,
+    budgetMax,
+    budget: `${formatYen(budgetMin)}〜${formatYen(budgetMax)}`,
     scene: fd.get("scene") || "",
     datetime: fd.get("datetime") || "",
     genre: fd.get("genre") || "",

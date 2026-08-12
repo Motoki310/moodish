@@ -70,16 +70,26 @@
         </div>
       </div>
 
-      <div class="field">
-        <label for="budget">予算 / 1人<span class="required">必須</span></label>
-        <select id="budget" name="budget" required>
-          <option value="" disabled selected>選択してください</option>
-          <option value="〜3,000円">〜3,000円</option>
-          <option value="3,000〜5,000円">3,000〜5,000円</option>
-          <option value="5,000〜8,000円">5,000〜8,000円</option>
-          <option value="8,000〜12,000円">8,000〜12,000円</option>
-          <option value="12,000円〜">12,000円〜</option>
-        </select>
+      <div class="field budget-field">
+        <label>予算 / 1人<span class="required">必須</span></label>
+
+        <div class="budget-values">
+          <span id="budgetMinLabel">3,000円</span>
+          <span class="budget-tilde">〜</span>
+          <span id="budgetMaxLabel">8,000円</span>
+        </div>
+
+        <div class="slider-row">
+          <span class="slider-label-left">下限</span>
+          <input type="range" id="budgetMin" name="budgetMin" min="1000" max="20000" step="500" value="3000">
+          <span class="slider-label-right"></span>
+        </div>
+
+        <div class="slider-row">
+          <span class="slider-label-left">上限</span>
+          <input type="range" id="budgetMax" name="budgetMax" min="1000" max="20000" step="500" value="8000">
+          <span class="slider-label-right"></span>
+        </div>
       </div>
 
       <div class="field">

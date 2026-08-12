@@ -321,9 +321,10 @@ select:focus {
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-/* mood sliders */
+/* mood / budget sliders */
 
-.mood-field .slider-row {
+.mood-field .slider-row,
+.budget-field .slider-row {
   display: grid;
   grid-template-columns: 70px 1fr 70px;
   align-items: center;
@@ -335,6 +336,23 @@ select:focus {
 
 .slider-label-left {
   text-align: right;
+}
+
+/* 予算スライダーの上に現在値を表示 */
+.budget-values {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary-darker);
+  margin-bottom: 10px;
+}
+
+.budget-tilde {
+  color: var(--color-text-sub);
+  font-weight: 400;
 }
 
 input[type="range"] {
@@ -593,7 +611,8 @@ input[type="range"] {
   .two-col {
     grid-template-columns: 1fr;
   }
-  .mood-field .slider-row {
+  .mood-field .slider-row,
+  .budget-field .slider-row {
     grid-template-columns: 55px 1fr 55px;
   }
 }
