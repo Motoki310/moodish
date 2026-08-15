@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 予算スライダー(下限・上限)の連動
   setupBudgetSliders(form);
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     if (!form.reportValidity()) {
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const data = collectFormData(form);
-    saveSubmission(data);
+    await saveSubmission(data);
     renderResult(data, resultCards);
 
     resultSection.classList.remove("hidden");
@@ -128,10 +128,18 @@ function collectFormData(form) {
   };
 }
 
-function saveSubmission(data) {
-  const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-  list.unshift(data); // 新しいものを先頭に
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+async function saveSubmission(data) {
+  const { error } = await db
+    .from("submissions")
+    .insert({
+      data: data
+    });
+
+  if (error) {
+    console.error("保存に失敗しました:", error);
+    alert("データの保存に失敗しました");
+    throw error;
+  }
 }
 
 function pickRandomRestaurants(pool, count) {
