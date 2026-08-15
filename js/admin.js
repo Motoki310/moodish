@@ -3,28 +3,37 @@
 // ==========================================================
 
 const STORAGE_KEY = "dateSpotProposalSubmissions";
-const ADMIN_PASSWORD = "eY3$Tf@FJLjkj^UwOQVr";
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const loginSection = document.getElementById("admin-login");
   const loginForm = document.getElementById("admin-login-form");
+  const emailInput = document.getElementById("admin-email");
   const passwordInput = document.getElementById("admin-password");
   const loginError = document.getElementById("admin-login-error");
   const content = document.getElementById("admin-content");
 
-  loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (passwordInput.value === ADMIN_PASSWORD) {
-      loginSection.classList.add("hidden");
-      content.classList.remove("hidden");
-      initAdminContent();
-    } else {
-      loginError.classList.remove("hidden");
-      passwordInput.value = "";
-      passwordInput.focus();
-    }
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  loginError.classList.add("hidden");
+
+  const { error } = await db.auth.signInWithPassword({
+    email: emailInput.value,
+    password: passwordInput.value
   });
 
+  if (error) {
+    loginError.classList.remove("hidden");
+    passwordInput.value = "";
+    passwordInput.focus();
+    return;
+  }
+
+  loginSection.classList.add("hidden");
+  content.classList.remove("hidden");
+  initAdminContent();
+});
   passwordInput.focus();
 });
 
