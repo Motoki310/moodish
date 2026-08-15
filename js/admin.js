@@ -44,12 +44,25 @@ function initAdminContent() {
   document.getElementById("clear-btn").addEventListener("click", clearAll);
 }
 
-function getSubmissions() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-}
+async function getSubmissions() {
+  const { data, error } = await db
+    .from("submissions")
+    .select("id, created_at, data")
+    .order("created_at", { ascending: false });
 
-function renderTable() {
-  const list = getSubmissions();
+  if (error) {
+    console.error("データ取得に失敗しました:", error);
+    alert("送信データの取得に失敗しました");
+    return [];
+  }
+
+  return data.map((row) => ({
+    ...row.data,
+    submittedAt: row.data.submittedAt || row.created_at
+  }));
+}
+async function renderTable() {
+  const list = await getSubmissions();
   const tbody = document.getElementById("admin-table-body");
   const emptyState = document.getElementById("empty-state");
   const countEl = document.getElementById("entry-count");
