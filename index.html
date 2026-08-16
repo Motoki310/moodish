@@ -30,20 +30,39 @@
     <fieldset class="form-block">
       <legend>必須項目</legend>
 
-      <div class="field">
-        <label for="purpose">目的・関係性<span class="required">必須</span></label>
-        <select id="purpose" name="purpose" required>
-          <option value="" disabled selected>選択してください</option>
-          <option value="初デート">初デート</option>
-          <option value="付き合う前">付き合う前</option>
-          <option value="恋人との普通のデート">恋人との普通のデート</option>
-          <option value="誕生日">誕生日</option>
-          <option value="記念日">記念日</option>
-          <option value="ちょっと特別">ちょっと特別</option>
-          <option value="友達以上恋人未満">友達以上恋人未満</option>
-          <option value="その他">その他</option>
-        </select>
-      </div>
+<div class="field">
+  <label for="relationship">
+    2人の関係性<span class="required">必須</span>
+  </label>
+
+  <select id="relationship" name="relationship" required>
+    <option value="" disabled selected>選択してください</option>
+    <option value="初対面">初対面</option>
+    <option value="付き合う前">付き合う前</option>
+    <option value="友達以上恋人未満">友達以上恋人未満</option>
+    <option value="恋人">恋人</option>
+    <option value="夫婦">夫婦</option>
+    <option value="友人">友人</option>
+    <option value="その他">その他</option>
+  </select>
+</div>
+
+<div class="field">
+  <label for="purpose">
+    今回の目的<span class="required">必須</span>
+  </label>
+
+  <select id="purpose" name="purpose" required>
+    <option value="" disabled selected>選択してください</option>
+    <option value="初デート">初デート</option>
+    <option value="普通のデート">普通のデート</option>
+    <option value="誕生日">誕生日</option>
+    <option value="記念日">記念日</option>
+    <option value="告白">告白</option>
+    <option value="ちょっと特別">ちょっと特別</option>
+    <option value="その他">その他</option>
+  </select>
+</div>
 
       <div class="field">
         <label>場所<span class="required">必須</span></label>
@@ -115,21 +134,39 @@
         <input type="datetime-local" id="datetime" name="datetime" required>
       </div>
 
-      <div class="field">
-        <label for="genre">店のジャンル<span class="required">必須</span></label>
-        <select id="genre" name="genre" required>
-          <option value="" disabled selected>選択してください</option>
-          <option value="イタリアン">イタリアン</option>
-          <option value="焼肉">焼肉</option>
-          <option value="和食">和食</option>
-          <option value="フレンチ">フレンチ</option>
-          <option value="中華">中華</option>
-          <option value="カフェ">カフェ</option>
-          <option value="その他">その他</option>
-          <option value="特に決めてない">特に決めてない</option>
-        </select>
-      </div>
+<div class="field">
+  <label for="genre">
+    店のジャンル<span class="required">必須</span>
+  </label>
 
+  <select id="genre" name="genre" required>
+    <option value="" disabled selected>選択してください</option>
+    <option value="特に決めてない">特に決めてない</option>
+    <option value="イタリアン">イタリアン</option>
+    <option value="フレンチ">フレンチ</option>
+    <option value="和食">和食</option>
+    <option value="寿司">寿司</option>
+    <option value="焼肉">焼肉</option>
+    <option value="焼鳥">焼鳥</option>
+    <option value="居酒屋">居酒屋</option>
+    <option value="中華">中華</option>
+    <option value="韓国料理">韓国料理</option>
+    <option value="エスニック">エスニック</option>
+    <option value="スペイン料理">スペイン料理</option>
+    <option value="ビストロ">ビストロ</option>
+    <option value="バル">バル</option>
+    <option value="カフェ">カフェ</option>
+    <option value="スイーツ">スイーツ</option>
+    <option value="その他">その他</option>
+  </select>
+
+  <input
+    type="text"
+    id="genreOther"
+    name="genreOther"
+    placeholder="その他の場合：例 タイ料理、もんじゃ、火鍋など"
+  >
+</div>
     </fieldset>
 
     <fieldset class="form-block optional">
@@ -186,7 +223,18 @@
           <option value="喫煙可でもOK">喫煙可でもOK</option>
         </select>
       </div>
+<div class="field">
+  <label for="requestText">
+    今回どんな感じのお店がいい？
+  </label>
 
+  <textarea
+    id="requestText"
+    name="requestText"
+    rows="4"
+    placeholder="例：付き合って2ヶ月。普段より少し特別感がほしいけど、高級すぎて重い感じにはしたくない。"
+  ></textarea>
+</div>
     </fieldset>
 
     <div class="submit-row">
